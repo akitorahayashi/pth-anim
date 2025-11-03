@@ -1,7 +1,19 @@
 import SwiftUI
 
-struct WorldPath: Shape, PathProvider {
+struct WorldPath: Shape, PathProtocol {
     var name: String { "World" }
+
+    var animationConfig: AnimationConfig {
+        AnimationConfig(
+            duration: 6.0,
+            delay: 2.5,
+            colors: [.blue, .cyan]
+        )
+    }
+
+    var designConfig: DesignConfig {
+        DesignConfig(lineWidth: 5.0)
+    }
 
     func path(in rect: CGRect) -> Path {
         var path = Path()

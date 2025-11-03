@@ -8,7 +8,7 @@ struct ContentView: View {
     @State private var drawProgress: CGFloat = 0.0
     @State private var isAnimatingForward = true
     @State private var isAnimating = false
-    @State private var currentPath: any PathProvider = FlowerPath()
+    @State private var currentPath: any PathProtocol = FlowerPath()
 
     var body: some View {
         GeometryReader { geometry in
@@ -20,11 +20,11 @@ struct ContentView: View {
                     .trim(from: 0.0, to: drawProgress)
                     .stroke(
                         LinearGradient(
-                            gradient: Gradient(colors: DesignConstants.gradientColors),
+                            gradient: Gradient(colors: currentPath.animationConfig.colors),
                             startPoint: .leading,
                             endPoint: .trailing
                         ),
-                        style: StrokeStyle(lineWidth: DesignConstants.lineWidth, lineCap: .round, lineJoin: .round)
+                        style: StrokeStyle(lineWidth: currentPath.designConfig.lineWidth, lineCap: .round, lineJoin: .round)
                     )
 
                 if !isAnimating {
@@ -66,13 +66,13 @@ struct ContentView: View {
         isAnimatingForward = true
         drawProgress = 0.0
 
-        withAnimation(.easeInOut(duration: AnimationConstants.duration)) {
+        withAnimation(.easeInOut(duration: currentPath.animationConfig.duration)) {
             print("\(startTime): startAnimation - Applying forward animation to 1.0.")
             drawProgress = 1.0
         }
 
         // Manually simulate completion for iOS versions prior to 17 by delaying for the duration
-        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationConstants.duration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + currentPath.animationConfig.duration) {
             let forwardEndTime = CFAbsoluteTimeGetCurrent()
             guard isAnimatingForward else {
                 print(
@@ -82,7 +82,7 @@ struct ContentView: View {
             }
             print("\(forwardEndTime): Forward animation visually completed. Starting delay.")
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationConstants.animationDelay) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + currentPath.animationConfig.delay) {
                 guard isAnimatingForward, isAnimating else {
                     print(
                         "\(CFAbsoluteTimeGetCurrent()): Delay finished, but animation state changed. Ignoring return trigger."
@@ -95,13 +95,13 @@ struct ContentView: View {
 
                 isAnimatingForward = false
 
-                withAnimation(.easeInOut(duration: AnimationConstants.duration)) {
+                withAnimation(.easeInOut(duration: currentPath.animationConfig.duration)) {
                     print("\(delayEndTime): Applying return animation to 0.0.")
                     drawProgress = 0.0
                 }
 
                 // Simulate completion of the return animation
-                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationConstants.duration) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + currentPath.animationConfig.duration) {
                     guard !isAnimatingForward, isAnimating else {
                         print(
                             "\(CFAbsoluteTimeGetCurrent()): Return animation completion called, but state is unexpected. Ignoring reset."

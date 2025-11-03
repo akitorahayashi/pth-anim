@@ -1,7 +1,19 @@
 import SwiftUI
 
-struct FlowerPath: Shape, PathProvider {
+struct FlowerPath: Shape, PathProtocol {
     var name: String { "Flower" }
+    
+    var animationConfig: AnimationConfig {
+        AnimationConfig(
+            duration: 4.0,
+            delay: 1.5,
+            colors: [.pink, .purple, .orange]
+        )
+    }
+
+    var designConfig: DesignConfig {
+        DesignConfig(lineWidth: 4.0)
+    }
 
     func path(in rect: CGRect) -> Path {
         var path = Path()

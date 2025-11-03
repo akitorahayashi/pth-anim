@@ -1,7 +1,19 @@
 import SwiftUI
 
-struct StarPath: Shape, PathProvider {
+struct StarPath: Shape, PathProtocol {
     var name: String { "Star" }
+
+    var animationConfig: AnimationConfig {
+        AnimationConfig(
+            duration: 3.5,
+            delay: 1.0,
+            colors: [.yellow, .orange]
+        )
+    }
+
+    var designConfig: DesignConfig {
+        DesignConfig(lineWidth: 3.0)
+    }
 
     func path(in rect: CGRect) -> Path {
         var path = Path()

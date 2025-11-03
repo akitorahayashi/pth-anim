@@ -1,7 +1,19 @@
 import SwiftUI
 
-struct HelloPath: Shape, PathProvider {
+struct HelloPath: Shape, PathProtocol {
     var name: String { "Hello" }
+    
+    var animationConfig: AnimationConfig {
+        AnimationConfig(
+            duration: 5.0,
+            delay: 2.0,
+            colors: [.green, .mint]
+        )
+    }
+
+    var designConfig: DesignConfig {
+        DesignConfig(lineWidth: 2.0)
+    }
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let width = rect.size.width
