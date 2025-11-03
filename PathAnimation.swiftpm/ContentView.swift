@@ -28,7 +28,7 @@ struct ContentView: View {
                     )
 
                 if !isAnimating {
-                    Text("画面をタップしてください")
+                    Text("Tap the screen")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .padding(.top, 50)
@@ -49,7 +49,6 @@ struct ContentView: View {
         }
     }
 
-    // アニメーションを開始する関数
     func startAnimation() {
         let startTime = CFAbsoluteTimeGetCurrent()
         guard !isAnimating else {

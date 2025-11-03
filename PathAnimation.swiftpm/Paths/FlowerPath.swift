@@ -25,7 +25,7 @@ struct FlowerPath: Shape, PathProtocol {
 
         for i in 0 ..< petalCount {
             let startAngle = Double(i) * angle
-            let endAngle = startAngle + angle * 0.8 // 少し重なるように
+            let endAngle = startAngle + angle * 0.8
 
             let petalPath = Path { petal in
                 let controlRadius = outerRadius * 0.7
@@ -53,14 +53,6 @@ struct FlowerPath: Shape, PathProtocol {
             }
             path.addPath(petalPath)
         }
-
-        // 中心に円を追加
-        path.addEllipse(in: CGRect(
-            x: center.x - innerRadius * 0.5,
-            y: center.y - innerRadius * 0.5,
-            width: innerRadius,
-            height: innerRadius
-        ))
 
         return path
     }
