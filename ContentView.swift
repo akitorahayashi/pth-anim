@@ -8,15 +8,9 @@ struct ContentView: View {
     @State private var drawProgress: CGFloat = 0.0
     @State private var isAnimatingForward = true
     @State private var isAnimating = false
-    @State private var currentPath: PathProvider = FlowerPath()
+    @State private var currentPath: any PathProvider = FlowerPath()
 
     var body: some View {
-        // PlaygroundではGeometryReaderがうまくサイズ決定できない場合があるので、
-        // 固定のフレーム（または.padding）でプレビューサイズを調整することがあります。
-        // ここでは元のロジックをそのまま使いますが、
-        // プレビューが見切れる場合は ZStack の .frame を固定値（例: .frame(width: 320, height: 180)）
-        // に変更してみてください。
-
         GeometryReader { geometry in
             // Calculate fitting size using the helper method
             let fittingSize = calculateFittingSize(for: geometry)
