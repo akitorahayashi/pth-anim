@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct WorldPath: Shape, PathProtocol {
-    var name: String { "World" }
+struct CirclePath: Shape, PathProtocol {
+    var name: String { "Circle" }
 
     var animationConfig: AnimationConfig {
         AnimationConfig(
-            duration: 6.0,
-            delay: 2.5,
+            duration: 2.0,
+            delay: 0.5,
             colors: [.blue, .cyan]
         )
     }

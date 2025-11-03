@@ -7,7 +7,7 @@ struct ContentView: View {
     @State private var drawProgress: CGFloat = 0.0
     @State private var isAnimatingForward = true
     @State private var isAnimating = false
-    @State private var currentPath: any PathProtocol = PathProvider.allPaths[0]
+    @State private var currentPath: any PathProtocol = HelloPath()
     @State var isMenuOpen = false
 
     var body: some View {

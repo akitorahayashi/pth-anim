@@ -4,7 +4,7 @@ struct MenuView: View {
     @Binding var isOpen: Bool
     @Binding var currentPath: any PathProtocol
     private let maxWidth = UIScreen.main.bounds.width
-
+    
     var body: some View {
         ZStack {
             Color.black
@@ -33,18 +33,9 @@ struct MenuView: View {
                         }
                     }
                 }
-                VStack {
-                    Spacer()
-                    Text("developed by")
-                        .font(.footnote)
-                    Text("akitorahayashi")
-                        .font(.footnote)
-                }
-                .foregroundColor(.secondary)
-                .padding()
             }
-            .padding(.trailing, maxWidth / 4)
-            .offset(x: isOpen ? 0 : -maxWidth)
         }
+        .padding(.trailing, maxWidth / 4)
+        .offset(x: isOpen ? 0 : -maxWidth)
     }
 }

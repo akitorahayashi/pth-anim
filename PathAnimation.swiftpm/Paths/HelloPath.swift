@@ -6,8 +6,8 @@ struct HelloPath: Shape, PathProtocol {
     var animationConfig: AnimationConfig {
         AnimationConfig(
             duration: 5.0,
-            delay: 2.0,
-            colors: [.green, .mint]
+            delay: 1.0,
+            colors: [.pink, .purple, .cyan]
         )
     }
 

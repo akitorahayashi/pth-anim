@@ -5,7 +5,7 @@ struct FlowerPath: Shape, PathProtocol {
 
     var animationConfig: AnimationConfig {
         AnimationConfig(
-            duration: 4.0,
+            duration: 3.0,
             delay: 1.5,
             colors: [.pink, .purple, .orange]
         )

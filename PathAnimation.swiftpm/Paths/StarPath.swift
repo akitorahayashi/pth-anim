@@ -5,7 +5,7 @@ struct StarPath: Shape, PathProtocol {
 
     var animationConfig: AnimationConfig {
         AnimationConfig(
-            duration: 3.5,
+            duration: 2.0,
             delay: 1.0,
             colors: [.yellow, .orange]
         )

@@ -5,7 +5,7 @@ enum PathProvider {
         FlowerPath(),
         StarPath(),
         HelloPath(),
-        WorldPath(),
+        CirclePath(),
     ]
 
     static func icon(for path: any PathProtocol) -> String {
@@ -16,8 +16,8 @@ enum PathProvider {
                 "star"
             case "Hello":
                 "hand.wave"
-            case "World":
-                "globe"
+            case "Circle":
+                "circle"
             default:
                 "questionmark"
         }
