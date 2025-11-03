@@ -1,0 +1,95 @@
+#===================================================================
+# SwiftLint Configuration
+# See https://realm.github.io/SwiftLint/rule-directory.html for rule details
+#===================================================================
+
+#-------------------------------------------------------------------
+# Analysis Targets
+#-------------------------------------------------------------------
+included:
+  - Sources
+
+excluded:
+  - .git
+  - .build
+  - DerivedData
+  - Sources/HelloFrameAnimation/.build
+  - .github
+  - Carthage
+  - build
+  - xcbuild
+  - "**/*.generated.swift"
+
+#-------------------------------------------------------------------
+# Rule Configuration
+#-------------------------------------------------------------------
+disabled_rules:
+  - trailing_whitespace # Allow trailing whitespace
+  - line_length # Line length is customized separately
+  - trailing_newline # Ignore trailing newlines
+  - trailing_comma # Disabled because controlled by SwiftFormat
+
+opt_in_rules:
+  - empty_count # Use isEmpty instead of count == 0
+  - force_unwrapping # Prohibit force unwrapping
+  - sorted_imports # Sort imports
+  - vertical_whitespace # Organize vertical whitespace
+
+analyzer_rules:
+  - unused_declaration # Detect unused declarations
+  - unused_import # Detect unused imports
+
+#-------------------------------------------------------------------
+# Individual Rule Settings
+#-------------------------------------------------------------------
+# Function body length limit
+function_body_length:
+  warning: 800
+  error: 1000
+
+# Type body length limit
+type_body_length:
+  warning: 800
+  error: 1000
+
+# File length limit
+file_length:
+  warning: 800
+  error: 1000
+
+# Cyclomatic complexity limit
+cyclomatic_complexity:
+  warning: 10
+  error: 20
+
+# Nesting limit
+nesting:
+  type_level:
+    warning: 3
+  function_level:
+    warning: 5
+
+# Identifier naming rules (variables, constants, etc.)
+identifier_name:
+  min_length: 2
+  max_length: 50
+  excluded:
+    - id
+    - URL
+    - x
+    - y
+    - i
+    - to
+    - at
+    - of
+    - from
+    - with
+
+# Switch case alignment - match SwiftFormat
+switch_case_alignment:
+  indented_cases: true
+
+#-------------------------------------------------------------------
+# Output Settings
+#-------------------------------------------------------------------
+reporter: "emoji"

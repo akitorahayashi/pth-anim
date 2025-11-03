@@ -1,0 +1,33 @@
+## User settings
+xcuserdata/
+
+## Build related
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+HelloFramePath.swiftpm/.swiftpm
+
+## Objective-C/Swift specific files
+*.hmap
+
+## Packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment variables and secrets
+*.env
+*.pem
+*.p12
+*.cer
+*.mobileprovision
+/.cursor/
