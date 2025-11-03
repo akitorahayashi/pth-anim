@@ -9,43 +9,60 @@ struct ContentView: View {
     @State private var isAnimatingForward = true
     @State private var isAnimating = false
     @State private var currentPath: any PathProtocol = FlowerPath()
-
+    @State var isMenuOpen = false
+    
     var body: some View {
-        GeometryReader { geometry in
-            // Calculate fitting size using the helper method
-            let fittingSize = calculateFittingSize(for: geometry)
+        ZStack {
+            NavigationStack {
+                GeometryReader { geometry in
+                    // Calculate fitting size using the helper method
+                    let fittingSize = calculateFittingSize(for: geometry)
 
-            ZStack {
-                AnyShape(currentPath)
-                    .trim(from: 0.0, to: drawProgress)
-                    .stroke(
-                        LinearGradient(
-                            gradient: Gradient(colors: currentPath.animationConfig.colors),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ),
-                        style: StrokeStyle(lineWidth: currentPath.designConfig.lineWidth, lineCap: .round, lineJoin: .round)
-                    )
+                    ZStack {
+                        AnyShape(currentPath)
+                            .trim(from: 0.0, to: drawProgress)
+                            .stroke(
+                                LinearGradient(
+                                    gradient: Gradient(colors: currentPath.animationConfig.colors),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                ),
+                                style: StrokeStyle(lineWidth: currentPath.designConfig.lineWidth, lineCap: .round, lineJoin: .round)
+                            )
 
-                if !isAnimating {
-                    Text("Tap the screen")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding(.top, 50)
-                        .transition(.opacity)
+                        if !isAnimating {
+                            Text("Tap the screen")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .padding(.top, 50)
+                                .transition(.opacity)
+                        }
+                    }
+                    .frame(width: fittingSize.width, height: fittingSize.height)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    let time = CFAbsoluteTimeGetCurrent()
+                    print("\(time): onTapGesture - Tap detected. isAnimating: \(isAnimating)")
+                    if !isAnimating {
+                        print("\(time): onTapGesture - Calling startAnimation.")
+                        startAnimation()
+                    }
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                isMenuOpen.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal")
+                        }
+                    }
                 }
             }
-            .frame(width: fittingSize.width, height: fittingSize.height)
-            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            let time = CFAbsoluteTimeGetCurrent()
-            print("\(time): onTapGesture - Tap detected. isAnimating: \(isAnimating)")
-            if !isAnimating {
-                print("\(time): onTapGesture - Calling startAnimation.")
-                startAnimation()
-            }
+            MenuView(isOpen: $isMenuOpen, currentPath: $currentPath)
         }
     }
 
