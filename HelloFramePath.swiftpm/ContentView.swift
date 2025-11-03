@@ -3,19 +3,27 @@ import SwiftUI
 // Define the target aspect ratio here
 private let targetAspectRatio: CGFloat = 16.0 / 9.0 // Example: 16:9. Adjust if needed.
 
+//
 struct ContentView: View {
-    @State private var drawProgress: CGFloat = AnimationConstants.startTrim
+    @State private var drawProgress: CGFloat = 0.0
     @State private var isAnimatingForward = true
     @State private var isAnimating = false
+    @State private var currentPath: PathProvider = FlowerPath()
 
     var body: some View {
+        // PlaygroundではGeometryReaderがうまくサイズ決定できない場合があるので、
+        // 固定のフレーム（または.padding）でプレビューサイズを調整することがあります。
+        // ここでは元のロジックをそのまま使いますが、
+        // プレビューが見切れる場合は ZStack の .frame を固定値（例: .frame(width: 320, height: 180)）
+        // に変更してみてください。
+
         GeometryReader { geometry in
             // Calculate fitting size using the helper method
             let fittingSize = calculateFittingSize(for: geometry)
 
             ZStack {
-                HelloPath()
-                    .trim(from: AnimationConstants.startTrim, to: drawProgress)
+                AnyShape(currentPath)
+                    .trim(from: 0.0, to: drawProgress)
                     .stroke(
                         LinearGradient(
                             gradient: Gradient(colors: DesignConstants.gradientColors),
@@ -56,18 +64,21 @@ struct ContentView: View {
         }
 
         print(
-            "\(startTime): startAnimation - Starting forward animation. Setting isAnimating=true, drawProgress=startTrim."
+            "\(startTime): startAnimation - Starting forward animation. Setting isAnimating=true, drawProgress=0.0."
         )
         withAnimation {
             isAnimating = true
         }
         isAnimatingForward = true
-        drawProgress = AnimationConstants.startTrim
+        drawProgress = 0.0
 
         withAnimation(.easeInOut(duration: AnimationConstants.duration)) {
-            print("\(startTime): startAnimation - Applying forward animation to endTrim.")
-            drawProgress = AnimationConstants.endTrim
-        } completion: {
+            print("\(startTime): startAnimation - Applying forward animation to 1.0.")
+            drawProgress = 1.0
+        }
+
+        // Manually simulate completion for iOS versions prior to 17 by delaying for the duration
+        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationConstants.duration) {
             let forwardEndTime = CFAbsoluteTimeGetCurrent()
             guard isAnimatingForward else {
                 print(
@@ -91,9 +102,12 @@ struct ContentView: View {
                 isAnimatingForward = false
 
                 withAnimation(.easeInOut(duration: AnimationConstants.duration)) {
-                    print("\(delayEndTime): Applying return animation to startTrim.")
-                    drawProgress = AnimationConstants.startTrim
-                } completion: {
+                    print("\(delayEndTime): Applying return animation to 0.0.")
+                    drawProgress = 0.0
+                }
+
+                // Simulate completion of the return animation
+                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationConstants.duration) {
                     guard !isAnimatingForward, isAnimating else {
                         print(
                             "\(CFAbsoluteTimeGetCurrent()): Return animation completion called, but state is unexpected. Ignoring reset."

@@ -1,9 +1,7 @@
-// swiftlint:disable function_body_length
-// swiftlint:disable type_body_length
-
 import SwiftUI
 
-struct HelloPath: Shape {
+struct HelloPath: Shape, PathProvider {
+    var name: String { "Hello" }
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let width = rect.size.width
@@ -789,5 +787,3 @@ struct HelloPath: Shape {
         return path
     }
 }
-
-// swiftlint:enable function_body_length type_body_length

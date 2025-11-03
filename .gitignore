@@ -1,16 +1,17 @@
-## ユーザー設定
+## User settings
 xcuserdata/
 
-## ビルド関連
+## Build related
 DerivedData/
 *.moved-aside
 *.pbxuser
 !default.pbxuser
+HelloFramePath.swiftpm/.swiftpm
 
-## Objective-C/Swift固有のファイル
+## Objective-C/Swift specific files
 *.hmap
 
-## パッケージング
+## Packaging
 *.ipa
 *.dSYM.zip
 *.dSYM
@@ -18,21 +19,15 @@ DerivedData/
 # Swift Package Manager
 .build/
 
-# macOSシステムファイル
+# macOS system files
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# 環境変数とシークレット
+# Environment variables and secrets
 *.env
 *.pem
 *.p12
 *.cer
 *.mobileprovision
 /.cursor/
-
-# CI/CD output directory
-ci-outputs/
-
-# UI Test Screenshots
-HelloFrameAnimationUITests/ScreenShots/ 

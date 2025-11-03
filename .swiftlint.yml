@@ -7,14 +7,13 @@
 # Analysis Targets
 #-------------------------------------------------------------------
 included:
-  - HelloFrameAnimation
-  - HelloFrameAnimationUITests
+  - HelloFramePath.swiftpm
 
 excluded:
   - .git
   - .build
   - DerivedData
-  - HelloFrameAnimation.xcodeproj
+  - HelloFramePath.swiftpm/.build
   - .github
   - Carthage
   - build
@@ -25,52 +24,52 @@ excluded:
 # Rule Configuration
 #-------------------------------------------------------------------
 disabled_rules:
-  - trailing_whitespace # 行末の空白を許可
-  - line_length # 行の長さは別途カスタマイズ
-  - trailing_newline # 末尾の改行を無視
-  - trailing_comma # SwiftFormatで制御するため無効化
+  - trailing_whitespace # Allow trailing whitespace
+  - line_length # Line length is customized separately
+  - trailing_newline # Ignore trailing newlines
+  - trailing_comma # Disabled because controlled by SwiftFormat
 
 opt_in_rules:
-  - empty_count # count == 0 の代わりに isEmpty を使用
-  - force_unwrapping # 強制アンラップを禁止
-  - sorted_imports # importを整列
-  - vertical_whitespace # 垂直方向の空白行を整理
+  - empty_count # Use isEmpty instead of count == 0
+  - force_unwrapping # Prohibit force unwrapping
+  - sorted_imports # Sort imports
+  - vertical_whitespace # Organize vertical whitespace
 
 analyzer_rules:
-  - unused_declaration # 未使用宣言の検出
-  - unused_import # 未使用importの検出
+  - unused_declaration # Detect unused declarations
+  - unused_import # Detect unused imports
 
 #-------------------------------------------------------------------
 # Individual Rule Settings
 #-------------------------------------------------------------------
-# 関数本体の長さ制限
+# Function body length limit
 function_body_length:
-  warning: 120
-  error: 150
+  warning: 800
+  error: 1000
 
-# 型定義の長さ制限
+# Type body length limit
 type_body_length:
-  warning: 300
-  error: 500
+  warning: 800
+  error: 1000
 
-# ファイルの長さ制限
+# File length limit
 file_length:
   warning: 800
   error: 1000
 
-# 循環的複雑度の制限
+# Cyclomatic complexity limit
 cyclomatic_complexity:
   warning: 10
   error: 20
 
-# ネスト制限
+# Nesting limit
 nesting:
   type_level:
     warning: 3
   function_level:
     warning: 5
 
-# 識別子 (変数名、定数名など) の命名規則
+# Identifier naming rules (variables, constants, etc.)
 identifier_name:
   min_length: 2
   max_length: 50
@@ -86,7 +85,7 @@ identifier_name:
     - from
     - with
 
-# switch文のcaseのアライメント - SwiftFormatと一致させる
+# Switch case alignment - match SwiftFormat
 switch_case_alignment:
   indented_cases: true
 

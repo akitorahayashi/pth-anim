@@ -5,10 +5,10 @@
 #-------------------------------------------------------------------
 # General Configuration
 #-------------------------------------------------------------------
-# Swiftのバージョン
---swiftversion 5.8
+# Swift version
+--swiftversion 6.0
 
-# 除外するディレクトリ（ビルド成果物、依存関係など）
+# Exclude directories (build artifacts, dependencies, etc.)
 --exclude .build
 --exclude DerivedData
 --exclude fastlane
@@ -16,60 +16,59 @@
 --exclude build
 --exclude xcbuild
 --exclude **/*.generated.swift
---exclude **/ci-outputs/**
---exclude CatBoard.xcodeproj
+--exclude HelloFramePath.swiftpm/.build
 
 #-------------------------------------------------------------------
 # Indentation & Spacing
 #-------------------------------------------------------------------
-# インデント設定
---indent 4                       # インデント幅をスペース4つに設定
---indentcase true               # case文はswitchよりインデントする
---maxwidth 120                   # 行の最大幅は120文字
---trimwhitespace always          # 行頭・行末の空白を削除
---commas always                  # カンマの後にスペースを入れる
---linebreaks lf                  # 改行コードをLFに統一
+# Indentation settings
+--indent 4                       # Set indent width to 4 spaces
+--indentcase true               # Indent case statements more than switch
+--maxwidth 120                   # Maximum line width is 120 characters
+--trimwhitespace always          # Remove whitespace at beginning and end of lines
+--commas always                  # Add space after commas
+--linebreaks lf                  # Unify line breaks to LF
 
 #-------------------------------------------------------------------
 # Braces & Structure
 #-------------------------------------------------------------------
-# 括弧のスタイル
---allman false                   # Swift標準の括弧スタイル：開き括弧を条件式と同じ行に配置
-                                 # 例: if (condition) {
-                                 #        処理
+# Brace style
+--allman false                   # Swift standard brace style: place opening brace on same line as condition
+                                 # Example: if (condition) {
+                                 #        code
                                  #     }
                                  
---closingparen balanced          # 複数行にわたる関数呼び出しなどで、閉じ括弧の位置を開始位置と同じレベルに揃える
-                                 # 例: someFunction(
+--closingparen balanced          # Align closing parenthesis at same level as start for multi-line function calls, etc.
+                                 # Example: someFunction(
                                  #        parameter1: value1,
                                  #        parameter2: value2
-                                 #     )  // ← 閉じ括弧が呼び出し開始位置と同じインデントレベル
+                                 #     )  // ← closing parenthesis at same indent level as call start
 
-# セミコロン
---semicolons never               # セミコロンを使用しない
+# Semicolons
+--semicolons never               # Do not use semicolons
 
 #-------------------------------------------------------------------
 # Wrapping & Collections
 #-------------------------------------------------------------------
-# 長い引数リストやコレクションの折り返し
---wraparguments before-first     # 引数リストを折り返す際、最初の引数の前（開き括弧の後）で折り返す
-                                 # 例: someFunction(  // 括弧の後で折り返し
+# Wrapping long argument lists and collections
+--wraparguments before-first     # When wrapping argument lists, wrap before first argument (after opening parenthesis)
+                                 # Example: someFunction(  // wrap after parenthesis
                                  #        arg1: value1,
                                  #        arg2: value2,
                                  #        arg3: value3
                                  #     )
-                                 # 長い引数リストが一目で識別しやすく、関数名と分離されて読みやすい
+                                 # Long argument lists are easily identifiable and separated from function names
 
---wrapcollections before-first   # 配列や辞書などのコレクションリテラルを折り返す際、最初の要素の前で折り返す
-                                 # 例: let array = [  // 括弧の後で折り返し
+--wrapcollections before-first   # When wrapping collection literals like arrays and dictionaries, wrap before first element
+                                 # Example: let array = [  // wrap after bracket
                                  #        item1,
                                  #        item2,
                                  #        item3
                                  #     ]
                                  # 
-                                 # let dictionary = [  // 括弧の後で折り返し
+                                 # let dictionary = [  // wrap after bracket
                                  #        "key1": value1,
                                  #        "key2": value2,
                                  #        "key3": value3
                                  #     ]
-                                 # 各要素が同じインデントレベルに並び、視覚的に整理されて読みやすい
+                                 # Each element at same indent level, visually organized and readable
